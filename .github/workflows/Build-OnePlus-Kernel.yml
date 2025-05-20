@@ -195,7 +195,7 @@ jobs:
          echo "CONFIG_KSU=y" >> ./common/arch/arm64/configs/gki_defconfig
 
           if [ "${{ github.event.inputs.kernelsu_variant }}" == "SKSU-U" ]; then
-            echo "CONFIG_KPM=y" >> ./common/arch/arm64/configs/gki_defconfig
+            #echo "CONFIG_KPM=y" >> ./common/arch/arm64/configs/gki_defconfig
           #if [ "${{ github.event.inputs.KERNEL_VERSION }}" = "5.10" ]; then
           #    echo "CONFIG_ZSMALLOC=y" >> ./common/arch/arm64/configs/gki_defconfig
           #    echo "CONFIG_ZRAM=y" >> ./common/arch/arm64/configs/gki_defconfig
@@ -374,16 +374,16 @@ jobs:
           done
           fi
 
-      - name: Apply patch_linux and replace Image
-        if: ${{ github.event.inputs.KPM == 'true' }}
-        run: |
-          cd /home/runner/work/Action_OnePlus_MKSU_SUSFS/Action_OnePlus_MKSU_SUSFS/kernel_workspace/kernel_platform/out/msm-kernel-${{ github.event.inputs.CPUD }}-gki/dist
-          curl -LO https://github.com/ShirkNeko/SukiSU_KernelPatch_patch/releases/download/0.11-beta/patch_linux
-          chmod +x patch_linux
-          ./patch_linux
-          rm -f Image
-          mv oImage Image
-          cp Image $GITHUB_WORKSPACE/AnyKernel3/Image
+      #- name: Apply patch_linux and replace Image
+        #if: ${{ github.event.inputs.VFS == 'true' }}
+        #run: |
+          #cd /home/runner/work/Action_OnePlus_MKSU_SUSFS/Action_OnePlus_MKSU_SUSFS/kernel_workspace/kernel_platform/out/msm-kernel-${{ github.event.inputs.CPUD }}-gki/dist
+          #curl -LO https://github.com/ShirkNeko/SukiSU_KernelPatch_patch/releases/download/0.11-beta/patch_linux
+          #chmod +x patch_linux
+          #./patch_linux
+          #rm -f Image
+          #mv oImage Image
+          #cp Image $GITHUB_WORKSPACE/AnyKernel3/Image
 
       - name: Remove _uv suffix from FEIL
         id: feil_clean
